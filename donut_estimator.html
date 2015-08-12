@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>David's Amazing Donut Estimator</title>
+</head>
+	<body>
+		<script type="text/javascript">
+
+		function topPotLocation(name, numberOfHoursPerDay, minCustomersPerHour, maxCustomersPerHour, avgDonutsPerCustomer) {
+			this.name = name;
+			this.numberOfHoursPerDay = numberOfHoursPerDay;
+			this.minCustomersPerHour = minCustomersPerHour;
+			this.maxCustomersPerHour = maxCustomersPerHour;
+			this.avgDonutsPerCustomer = avgDonutsPerCustomer;
+			this.getCustomersPerHour = function() {
+				return Math.round(Math.random() * (this.maxCustomersPerHour - this.minCustomersPerHour) + this.minCustomersPerHour);
+			};
+			this.getCustomersPerDay = function() {
+				var totalCustomersPerDay = 0;
+				for (var index = 0 ; index < numberOfHoursPerDay ; index++ ) {
+					totalCustomersPerDay += this.getCustomersPerHour();
+				}
+				return totalCustomersPerDay;
+			};
+			this.getDonutsPerHour = function() {
+				return Math.round(this.getCustomersPerHour() * this.avgDonutsPerCustomer);
+			};
+			this.getDonutsPerDay = function() {
+				return Math.round(this.getCustomersPerDay() * this.avgDonutsPerCustomer);
+			};
+		}
+
+		var downtown = new topPotLocation("Downtown", 15, 8, 43, 4.5);
+		var capitolHill = new topPotLocation("Capitol Hill", 13, 4, 37, 2);
+		var southLakeUnion = new topPotLocation("South Lake Union", 15, 9, 23, 6.33);
+		var wedgwood = new topPotLocation("Wedgwood", 12, 2, 28, 1.25);
+		var ballard = new topPotLocation("Ballard", 11, 8, 58, 3.75);
+
+		console.log("The Downtown location needs to bake " + downtown.getDonutsPerHour() +
+			" donuts per hour, and " + downtown.getDonutsPerDay() + " donuts per day.");
+		console.log("The Capitol Hill location needs to bake " + capitolHill.getDonutsPerHour() +
+			" donuts per hour, and " + capitolHill.getDonutsPerDay() + " donuts per day.");
+		console.log("The South Lake Union location needs to bake " + southLakeUnion.getDonutsPerHour() +
+			" donuts per hour, and " + southLakeUnion.getDonutsPerDay() + " donuts per day.");
+		console.log("The Wedgwood location needs to bake " + wedgwood.getDonutsPerHour() +
+			" donuts per hour, and " + wedgwood.getDonutsPerDay() + " donuts per day.");
+		console.log("The Ballard location needs to bake " + ballard.getDonutsPerHour() +
+			" donuts per hour, and " + ballard.getDonutsPerDay() + " donuts per day.");
+
+		</script>
+	</body>
+</html>
